@@ -1,0 +1,262 @@
+@font-face {
+  font-family: "Avant Garde Condensed";
+  src: url("assets/fonts/avant-garde-gothic-book-condensed.otf") format("opentype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+:root {
+  --unit: 0.5em;
+  --baseFontSize: 16px;
+
+  --mainMarkerSize: 3px;
+  --mainMarkerColor: #ffef93;
+  --mainMarkerContent: '';
+  --mainMarkerAngle: 180deg;
+  --mainMarkerSpace: 32px;
+
+  --secondHandAngle: 180deg;
+  --minuteHandAngle: 180deg;
+  --hourHandAngle: 180deg;
+
+  --lightSilver: #f2f3f4;
+  --silver: #b5b5bd;
+  --navy: #1d2232;
+  --lightNavy: #21273a;
+  --darkNavy: #191d2b;
+  --teal: #669999;
+  --darkTeal: #20393b;
+  --redOrange: #f5291d;
+  --darkGrey: #3d3d3e;
+}
+
+html, body {
+  height: 100%;
+  margin: 0;
+
+  font-size: var(--baseFontSize);
+  background-color: var(--navy);
+}
+
+@media (max-width: 480px) {
+  html, body {
+    font-size: calc(var(--baseFontSize) * 0.8);
+  }
+}
+
+.clock-container {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+
+.clock-border {
+  width: 22.25em;
+  height: 22.25em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  background: linear-gradient(315deg, var(--lightSilver), var(--silver));
+}
+
+.clock {
+  width: 20em;
+  height: 20em;
+  background-color: var(--navy);
+  box-shadow: inset -1.5em -1.5em 0 var(--darkNavy),
+              inset 1.5em 1.5em 0 var(--lightNavy);
+  position: relative;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  border: 0.125em solid var(--darkNavy);
+  box-sizing: border-box;
+}
+
+.text-block {
+  position: absolute;
+  top: 30%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.heading {
+  font-family: 'Didact Gothic', 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  font-weight: 300;
+  color: var(--mainMarkerColor);
+  font-size: 1em;
+  letter-spacing: 0.125em;
+  margin: 0;
+}
+
+p {
+  font-family: 'Didact Gothic', 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  font-weight: 300;
+  color: var(--mainMarkerColor);
+  font-size: 0.5em;
+  letter-spacing: 0.125em;
+  margin: 0;
+}
+
+.center {
+  width: 1em;
+  height: 1em;
+  border-radius: 50%;
+  background-color: var(--silver);
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.center::before {
+  content: '';
+  display: block;
+  width: 0.5em;
+  height: 0.5em;
+  border-radius: 50%;
+  background-color: var(--darkGrey);
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.hand {
+  width: 0.125em;
+  background-color: var(--silver);
+  border-bottom-left-radius: 50%;
+  border-bottom-right-radius: 50%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform-origin: top;
+}
+
+.minute-hand {
+  z-index: 3;
+  height: 8.25em;
+  transform: translateX(-50%) rotate(var(--minuteHandAngle));
+  display: flex;
+  justify-content: center;
+}
+
+.minute-hand::before {
+  z-index: 4;
+  content: '';
+  display: block;
+  width: 0.25em;
+  height: 5.5em;
+  background-color: var(--silver);
+  position: absolute;
+  border-bottom-left-radius: 50%;
+  border-bottom-right-radius: 50%;
+}
+
+.hour-hand {
+  z-index: 1;
+  height: 6.25em;
+  transform: translateX(-50%) rotate(var(--hourHandAngle));
+  display: flex;
+  justify-content: center;
+}
+
+.hour-hand::before {
+  z-index: 2;
+  content: '';
+  display: block;
+  width: 0.125em;
+  height: 4em;
+  background-color: var(--silver);
+  position: absolute;
+  border-bottom-left-radius: 50%;
+  border-bottom-right-radius: 50%;
+}
+
+.main-marker {
+  padding: calc(var(--unit) * 2);
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  box-sizing: border-box;
+}
+
+.main-marker::before {
+  content: '';
+  height: var(--mainMarkerSize);
+  width: var(--mainMarkerSize);
+  border-radius: 50%;
+  background-color: var(--mainMarkerColor);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  bottom: var(--mainMarkerSpace);
+  box-shadow: 0.125em -0.125em black;
+}
+
+.main-marker::after {
+  color: var(--mainMarkerColor);
+  content: var(--mainMarkerContent);
+  height: var(--mainMarkerSize);
+  width: var(--mainMarkerSize);
+  transform: rotate(var(--mainMarkerAngle));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Avant Garde Condensed', 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+.second-dial {
+  border-radius: 50%;
+  width: 5em;
+  height: 5em;
+  background-color: var(--navy);
+  box-shadow: inset 0.125em 0.125em 0 #0c0e14,
+              inset -0.125em -0.125em 0 #2e3650;
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  margin-bottom: 0.5em;
+  display: flex;
+  justify-content: center;
+}
+
+.second-dial-center {
+  width: 0.5em;
+  height: 0.5em;
+  border-radius: 50%;
+  background-color: var(--redOrange);
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.secondary-marker {
+  z-index: -1;
+  position: absolute;
+  height: 4.75em;
+  width: 0.125em;
+  background: radial-gradient(var(--teal), var(--darkTeal));
+  -webkit-mask: radial-gradient(24px, transparent 100%, #000);
+}
+
+.second-hand {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0.125em;
+  height: 2em;
+  background-color: var(--redOrange);
+  transform: translateX(-50%) rotate(var(--secondHandAngle));
+  transform-origin: top;
+}
+
